@@ -11,17 +11,23 @@ async function getPokemonData(id) {
     const height = pokemonData.height;
     const weight = pokemonData.weight;
     const types = pokemonData.types.map((typeInfo) => typeInfo.type.name);
-    const habitat = pokemonExtraInfo.habitat
-      ? pokemonExtraInfo.habitat.name
-      : "Unknown";
+    let habitat;
+    if (pokemonExtraInfo.habitat) {
+      habitat = pokemonExtraInfo.habitat.name;
+    } else {
+      habitat = "Unknown";
+    }
     const isLegendary = pokemonExtraInfo.is_legendary;
 
     const description = pokemonExtraInfo.flavor_text_entries.find(
       (entry) => entry.language.name === "en"
     );
-    const flavorText = description
-      ? description.flavor_text
-      : "No description available.";
+    let flavorText;
+    if (description) {
+      flavorText = description.flavor_text;
+    } else {
+      flavorText = "No description available.";
+    }
 
     const imageUrl = pokemonData.sprites.front_default;
 
